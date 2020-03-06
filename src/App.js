@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+console.log(process.env.REACT_APP_API_KEY);
+
 export default class App extends Component {
   state = {
     data: [],
@@ -15,7 +17,7 @@ export default class App extends Component {
 
   componentDidMount = () => {
     fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
     )
       .then((res) => res.json())
       .then((data) => {
