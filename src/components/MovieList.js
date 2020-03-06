@@ -17,6 +17,9 @@ export default class MovieList extends Component {
                           className="card-img-top"
                           src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`}
                           alt="Card image cap"
+                          onError={(e) =>
+                            (e.target.src = 'https://fakeimg.pl/300x450/')
+                          }
                         />
                         <div className="card-body overflow-auto">
                           <h5 className="card-title">{movie.title}</h5>
