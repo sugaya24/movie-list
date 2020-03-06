@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-console.log(process.env.REACT_APP_API_KEY);
+console.log(REACT_APP_API_KEY);
 
 export default class App extends Component {
   state = {
