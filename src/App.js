@@ -24,7 +24,7 @@ export default class App extends Component {
           data: data.results
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err, 'catch something error'));
   };
 
   handleClick = (movie) => {
