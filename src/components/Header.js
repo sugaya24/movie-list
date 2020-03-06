@@ -18,7 +18,7 @@ export default class Header extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
             <a className="navbar-brand" href="#">
-              Navbar
+              Movie List
             </a>
             <div className="collapse navbar-collapse justify-content-end">
               <ul className="navbar-nav">

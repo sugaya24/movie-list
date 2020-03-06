@@ -7,11 +7,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 export default class App extends Component {
-  state = {
-    data: [],
-    like: false,
-    likedList: []
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      like: false,
+      likedList: [],
+      query: ''
+    };
+    this.getSearch = this.getSearch.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
+  }
 
   componentDidMount = () => {
     fetch(
@@ -24,7 +31,7 @@ export default class App extends Component {
           data: data.results
         });
       })
-      .catch((err) => console.log(err, 'catch something error'));
+      .catch((err) => console.log(err));
   };
 
   handleClick = (movie) => {
@@ -50,10 +57,50 @@ export default class App extends Component {
     });
   };
 
+  updateSearch = (e) => {
+    this.setState({
+      query: e.target.value
+    });
+  };
+
+  getSearch = (e) => {
+    e.preventDefault();
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&query=${this.state.query}&page=1`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        data.results.map((movie) => (movie.like = this.state.like));
+        this.setState({
+          data: data.results
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <div>
         <Header />
+        <div className="container d-flex justify-content-center">
+          <form
+            className="search-form form-inline my-2"
+            onSubmit={this.getSearch}
+          >
+            <input
+              className="search-bar form-control"
+              type="text"
+              value={this.state.query}
+              onChange={this.updateSearch}
+            />
+            <button
+              className="search-button btn btn-outline-dark"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
+        </div>
         <MovieList
           data={this.state.data}
           like={this.state.like}
